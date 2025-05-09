@@ -1,32 +1,3 @@
-// import {useState} from 'react'
-// import { Menu, X } from 'lucide-react'
-
-// export function MobileNavigation() {
-//     const [isOpen, setIsOpen] = useState(false)
-//     return (
-//         <nav className=''>
-//             <button onClick={() => setIsOpen(true)} className={`cursor-pointer ${isOpen ? 'hidden' : 'block'}`}>
-//                 <span className='sr-only'>Open menu</span>
-//                 <Menu/>
-//             </button>
-//             {
-//                 isOpen && <div className='w-10/12 absolute left-0 top-0 bg-amber-300 flex flex-col z-30 h-screen'>
-//                     <button onClick={() => setIsOpen(false)} className='cursor-pointer'>
-//                         <X/>
-//                     </button>
-//                     <ul>
-//                         <li>Collections</li>
-//                         <li>Men</li>
-//                         <li>Women</li>
-//                         <li>About</li>
-//                         <li>Contact</li>
-//                     </ul>
-//                 </div>
-//             }
-//         </nav>
-//     )
-// }
-
 import { cn } from "../lib/utils"
 import {
     NavigationMenu,
@@ -74,3 +45,36 @@ export function MobileNavigation () {
     )
   }
   
+export function DesktopNavigation() {
+  return (
+    <NavigationMenu className="hidden md:flex">
+      <NavigationMenuList className="gap-10">
+        <NavigationMenuItem className="cursor-pointer">
+          <NavigationMenuLink className="text-muted-foreground">
+            Collections
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem className="cursor-pointer">
+          <NavigationMenuLink className="text-muted-foreground">
+            Collections
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem className="cursor-pointer">
+          <NavigationMenuLink className="text-muted-foreground">
+            Men
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem className="cursor-pointer">
+          <NavigationMenuLink className="text-muted-foreground">
+            About
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem className="cursor-pointer">
+          <NavigationMenuLink className="text-muted-foreground">
+            Contact
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
+  )
+}

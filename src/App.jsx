@@ -47,7 +47,7 @@ function App() {
     }
   
   return (
-    <div>
+    <div className=''>
       <Header item={item} removeFromCart={removeFromCart}/>
       <Main item={item} handleIncrement={handleIncrement} handleDecrement={handleDecrement} addToCart={addToCart}/>
     </div>

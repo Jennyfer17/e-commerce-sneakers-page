@@ -1,65 +1,66 @@
-import { ProductImage } from "./ProductImage"
 import ImageProduct1 from "../assets/image-product-1.jpg"
 import ImageProduct2 from "../assets/image-product-2.jpg"
 import ImageProduct3 from "../assets/image-product-3.jpg"
 import ImageProduct4 from "../assets/image-product-4.jpg"
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-  } from "../components/ui/carousel"
+import ProductImage from "./ProductImageDesktop"
 import { Button } from "./ui/button"
 import { AddSubtract } from "./AddSubtract"
-import CartIcon from "../assets/icon-cart.svg";
-
-import { Cart } from "./Cart"
-import { useState } from "react"
+import CarouselImages from "./CarouselImages"
+import { ShoppingCart } from "lucide-react"
 
 
 export default function Main({item, handleIncrement, handleDecrement, addToCart}) {
-    const imagesArray = [ImageProduct1, ImageProduct2, ImageProduct3, ImageProduct4]
-    // console.log(item.quantity)
-    console.log(item.inCart)
+    const images = [
+        {
+            id: 1,
+            img: ImageProduct1,
+            alt: "sneaker 1"
+        },
+        {
+            id: 2,
+            img: ImageProduct2,
+            alt: "sneaker 2"
+        },
+        {
+            id: 3,
+            img: ImageProduct3,
+            alt: "sneaker 3"
+        },
+        {
+            id: 4,
+            img: ImageProduct4,
+            alt: "snearke 4"
+        }
+    ]
 
     return (
-        <main className="grid space-y-6">
-            <div>
-                <Carousel className="w-full" opts={{loop: true}}>
-                    <CarouselContent>
-                        {
-                           imagesArray.map((image, index)=> {
-                            return (
-                                <CarouselItem key={index}>
-                                    <div className="flex aspect-square items-center justify-center">
-                                        <ProductImage image={image} alt={`Sneaker ${index + 1}`} className={"h-80 w-full bg-cover object-cover"}/>
-                                    </div>
-                                </CarouselItem>
-                            )
-                           }) 
-                        }
-                    </CarouselContent>
-                    <CarouselPrevious className="absolute top-1/2 left-4 -translate-y-1/2 rounded-full bg-white p-2 shadow-md hover:bg-gray-200 transition duration-300 ease-in-out w-10 h-10" ></CarouselPrevious>
-                    <CarouselNext className="absolute top-1/2 right-4 -translate-y-1/2 rounded-full bg-white p-2 shadow-md hover:bg-gray-200 transition duration-300 ease-in-out w-10 h-10"></CarouselNext>
-                </Carousel>
+        <main className="grid md:grid-cols-2 space-y-6 md:gap-16 md:items-center md:px-[200px] md:my-[100px]">
+            <div className="flex md:hidden">
+                <CarouselImages imagesArray={images}/>
             </div>
-            <div className="px-6 grid space-y-2">
-                <span className="uppercase text-gray-500 font-thin text-xs">{item.name}</span>
-                <h1 className="text-xl font-medium w-52">{item.title}</h1>
-                <p className="text-gray-500 text-justify">{item.description}</p>
+            <div className="hidden md:grid">
+                <ProductImage imagesArray={images}/>
             </div>
-            <div className="px-6 flex relative">
-                <span className="flex space-x-3 items-center">
-                    <span className="font-medium text-2xl">${item.newPrice}</span>
-                    <span className="py-1 px-2 rounded-[5px] bg-gray-900 text-xs text-white">{item.discount}%</span>
-                </span>
-                <span className="flex justify-end font-medium absolute right-0 px-6 text-muted-foreground">${item.oldPrice}</span>
-            </div>                
-            <div className="mx-6"><AddSubtract handleIncrement={handleIncrement} handleDecrement={handleDecrement}/></div>
-            <Button className={`mx-6 rounded-[8px] mb-10 py-6 flex items-center space-x-3`} disabled={item.quantity === 0} onClick={()=> addToCart()}>
-               <img src={CartIcon} alt="cart icon" className="w-4 h-4"/> <span>Add to cart</span>
-            </Button>
+            <div className="grid px-6 space-y-4 md:gap-8">
+                <div className="grid md:gap-2">
+                    <span className="uppercase text-gray-500 font-thin text-xs md:text-sm">{item.name}</span>
+                    <h1 className="text-xl font-medium w-52 md:text-4xl md:w-96">{item.title}</h1>
+                    <p className="text-gray-500 text-justify">{item.description}</p>
+                </div>
+                <div className="flex relative items-center md:grid md:grid-rows-2 md:gap-8">
+                    <span className="flex space-x-3 items-center">
+                        <span className="font-medium text-2xl">${item.newPrice}</span>
+                        <span className="py-1 px-2 rounded-[5px] bg-gray-900 text-xs text-white">{item.discount}%</span>
+                    </span>
+                    <span className="font-medium absolute right-0 text-muted-foreground md:left-0">${item.oldPrice}</span>
+                </div>
+                <div className="grid md:grid-cols-3 space-y-4 md:gap-3">
+                    <AddSubtract handleIncrement={handleIncrement} handleDecrement={handleDecrement}/>
+                    <Button className={`w-full rounded-[8px] mb-10 py-6 flex items-center space-x-3 md:col-span-2 bg-orange hover:bg-pale-orange text-black cursor-pointer`} disabled={item.quantity === 0} onClick={()=> addToCart()}>
+                        <ShoppingCart/> <span>Add to cart</span>
+                    </Button>
+                </div>             
+            </div>
         </main>
     )
 }

@@ -20,7 +20,7 @@ export function Cart({item, removeFromCart}) {
                             </Button>
                         </span>
                     </div>
-                    <Button>Checkout</Button>
+                    <Button className="bg-orange text-black">Checkout</Button>
                 </div>) : (
                     <div>
                         <p className="text-muted-foreground">Your cart is empty</p>
